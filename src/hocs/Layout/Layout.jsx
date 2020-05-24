@@ -1,26 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { Grid, Container } from '@material-ui/core'
+import { Grid, Container } from "@material-ui/core";
 
-import Navbar from '../../components/Navigation/Navbar/Navbar'
+import Navbar from "../../components/Navigation/Navbar/Navbar";
 
 const Layout = (props) => {
-    return (
-        <Grid
-            container
-            direction="column">
-            <Grid item xs={12}>
-                <Navbar />
-            </Grid>
-            <Grid
-                container
-                item
-            >
-                {/* <Container maxWidth="md"> */}
-                {props.children}
-                {/* </Container> */}
-            </Grid>
-        </Grid>
-    );
+	return (
+		<Grid container direction="column">
+			<Grid item xs={12}>
+				<Navbar />
+			</Grid>
+			<Grid container>{props.children}</Grid>
+		</Grid>
+	);
 };
 export default Layout;

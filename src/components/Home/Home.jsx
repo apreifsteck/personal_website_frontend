@@ -65,7 +65,6 @@ const Home = (props) => {
 	return (
 		<Grid container direction="column">
 			<Grid
-				// item
 				spacing={10}
 				container
 				direction="column"
