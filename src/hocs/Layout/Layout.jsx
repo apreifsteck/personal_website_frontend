@@ -16,9 +16,9 @@ const Layout = (props) => {
                 container
                 item
             >
-                <Container maxWidth="md">
-                    {props.children}
-                </Container>
+                {/* <Container maxWidth="md"> */}
+                {props.children}
+                {/* </Container> */}
             </Grid>
         </Grid>
     );
