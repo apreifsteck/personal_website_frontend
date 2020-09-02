@@ -9,6 +9,8 @@ const Editor = (props) => {
 			variant="outlined"
 			multiline
 			onChange={props.changed}
+			onPaste={props.paste}
+			fullWidth
 			value={props.text}
 		/>
 	);
