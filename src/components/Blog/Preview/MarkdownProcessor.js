@@ -40,7 +40,12 @@ const markdownToHTML = (text, media) => {
         return `<code>${group1}</code>`
     })
     text = text.replace(expressions.image, (match, group1) => {
-        return `<img src="${media[group1]}"/>`
+        // First, look in our object of picture snapshots.
+        if (media.hasOwnProperty(group1)) {
+            return `<img src="${media[group1]}"/>`
+        }
+        return `<img src="${group1}"/>`
+
     })
 
     return text
