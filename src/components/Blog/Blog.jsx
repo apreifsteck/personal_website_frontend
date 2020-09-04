@@ -20,8 +20,6 @@ const Blog = (props) => {
 
 	const handlePaste = (event) => {
 		// TODO: preserve undo
-		// event.preventDefault()
-		// console.log(event.clipboardData)
 		const items = event.clipboardData.items
 		for (var item of items) {
 			if (item.kind === "file") {
