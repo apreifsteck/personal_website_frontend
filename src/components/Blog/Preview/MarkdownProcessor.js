@@ -1,12 +1,12 @@
 const markdownToHTML = (text, media) => {
     const expressions = {
         headers: [
-            /###### (.*)/g,
-            /##### (.*)/g,
-            /#### (.*)/g,
-            /### (.*)/g,
-            /## (.*)/g,
-            /# (.*)/g,
+            /###### (.*)\n/g,
+            /##### (.*)\n/g,
+            /#### (.*)\n/g,
+            /### (.*)\n/g,
+            /## (.*)\n/g,
+            /# (.*)\n/g,
         ],
         unordered_lists: /((-) (.*\n?))+/g,
         ordered_lists: /((\d\.) (.*\n?))+/g,
@@ -26,7 +26,6 @@ const markdownToHTML = (text, media) => {
     })
 
     text = text.replace(expressions.ordered_lists, (match) => {
-        console.log(match)
         const innerListReplace = match.replace(/\d\. (.*)/g, (innerMatch, group1) => `<li>${group1}</li>`)
         return `<ol>${innerListReplace}</ol>`
     })

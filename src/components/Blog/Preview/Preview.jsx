@@ -1,16 +1,34 @@
 import React, { useRef, useEffect } from 'react';
 
-import { TextField, Typography } from "@material-ui/core"
+import { TextField, Typography, Container, makeStyles } from "@material-ui/core"
 
 import markdownToHTML from "./MarkdownProcessor.js"
+import { Fragment } from 'react';
 
-const Prview = (props) => {
+const useStyles = makeStyles({
+    root: {
+        overflowWrap: "anywhere",
+        whiteSpace: "pre-line"
+    }
+})
+
+const Preview = (props) => {
     const innerEl = useRef(null)
-    useEffect(() => { innerEl.current.innerHTML = markdownToHTML(props.text, props.media) })
-    return (
-        <Typography ref={innerEl}>
+    useEffect(() => { 
+        innerEl.current.innerHTML = markdownToHTML(props.body, props.media) 
+    })
 
-        </Typography>
+    const classes = useStyles()
+    return (
+        <Fragment>
+            <h1>{props.title}</h1>
+            <Typography 
+                align='left' 
+                ref={innerEl} 
+                className={classes.root} 
+            />
+        </Fragment>
+        
     );
 };
-export default Prview;
+export default Preview;

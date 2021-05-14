@@ -6,11 +6,13 @@ import Navbar from "../../components/Navigation/Navbar/Navbar";
 
 const Layout = (props) => {
 	return (
-		<Grid container direction="column">
+		<Grid container direction="column" spacing={4}>
 			<Grid item xs={12}>
 				<Navbar />
 			</Grid>
-			<Grid container>{props.children}</Grid>
+			<Grid item xs={12}>
+				{props.children}
+			</Grid>
 		</Grid>
 	);
 };
