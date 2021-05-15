@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Container } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import Navbar from "../../components/Navigation/Navbar/Navbar";
 

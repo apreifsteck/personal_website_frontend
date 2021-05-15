@@ -9,7 +9,6 @@ import {
 import {
 	Paper,
 	Container,
-	Divider,
 	Typography,
 	IconButton,
 } from "@material-ui/core";
@@ -42,23 +41,27 @@ const Home = (props) => {
 		{
 			title: "React",
 			src: "logo192.png",
+			alt: "React logo"
 		},
 		{
 			title: "Material UI",
 			src: "material-ui_logo.svg",
+			alt: "Material UI logo"
 		},
 		{
 			title: "Phoenix",
 			src: "phoenix_logo.svg",
+			alt: "Phoenix logo"
 		},
 
 		{
 			title: "Docker",
 			src: "docker_logo.png",
+			alt: "Docker logo"
 		},
 	].map((item) => (
 		<GridListTile key={item.src}>
-			<img className={classes.gridItem} src={item.src} />
+			<img className={classes.gridItem} src={item.src} alt={item.alt} />
 			<GridListTileBar title={item.title} />
 		</GridListTile>
 	));

@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { colors } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	panel_top: {

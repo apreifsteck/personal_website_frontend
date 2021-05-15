@@ -1,7 +1,7 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 
 import { Grid, Container, Typography } from "@material-ui/core";
-import styles, { animationDuration } from "./styles";
+import styles from "./styles";
 import classnames from "classnames";
 
 const AboutMe = (props) => {
@@ -15,7 +15,6 @@ const AboutMe = (props) => {
 			} else {
 				setImgSrc(professional ? professionalSrc : goofySrc);
 			}
-			// }, animationDuration / 2);
 		}, 60);
 		toggleProfessional(!professional);
 	};
@@ -33,6 +32,7 @@ const AboutMe = (props) => {
 					<Grid item xs={3}>
 						<img
 							src={imgSrc}
+							alt="A professional or silly profile shot"
 							className={classnames(classes.profilePic, {
 								[classes.flipImage]: professional === true,
 								[classes.unflipImage]: professional === false,

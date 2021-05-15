@@ -1,6 +1,6 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 
-import { Button, Container, Switch, TextField } from "@material-ui/core";
+import { Button, Container, Switch } from "@material-ui/core";
 import { Grid, Typography } from "@material-ui/core";
 
 import Editor from "./Editor/Editor";
@@ -32,10 +32,6 @@ const Blog = (props) => {
 
 	const [state, dispatch] = useReducer(reducer, initialState)
 
-	const handleChange = (event) => {
-		dispatch({type: 'UPDATE_BODY', payload: event.target.value})
-	}
-
 	const handlePaste = (event) => {
 		// TODO: preserve undo		
 		const items = event.clipboardData.items
@@ -55,8 +51,6 @@ const Blog = (props) => {
 			}
 		}
 	}
-
-	const handleSubmit = () => {}
 
 	return( 
 		<Container>

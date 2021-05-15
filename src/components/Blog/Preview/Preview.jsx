@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-import { TextField, Typography, Container, makeStyles } from "@material-ui/core"
+import {  Typography, makeStyles } from "@material-ui/core"
 
 import markdownToHTML from "./MarkdownProcessor.js"
 import { Fragment } from 'react';
