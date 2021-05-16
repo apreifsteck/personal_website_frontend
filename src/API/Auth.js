@@ -9,6 +9,10 @@ export const createSession = (uname, password) => {
     })
 }
 
+export const deleteSession = () => {
+    return axios.delete("/auth/session", {})
+}
+
 // export const refresh = () => {
     // return axios.post("/auth/refresh")
 // }

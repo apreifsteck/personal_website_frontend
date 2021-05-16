@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { AuthContext } from '../../hocs/contexts/authContext'
+import React, {useState } from 'react'
+import { useAuth, actions } from '../../hocs/contexts/authContext'
 import { createSession } from '../../API/Auth'
 
 import { Button, Grid, makeStyles, TextField, Typography } from '@material-ui/core'
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
 const Login = (props) => {
     const classes = useStyles()
 
-    const authContext = useContext(AuthContext)
-    console.log(authContext.uname)
+    // const authContext = useContext(AuthContext)
+    const [, authActions] = useAuth()
 
     const [pass, setPass] = useState("")
     const [uname, setUname] = useState("")
@@ -32,10 +32,11 @@ const Login = (props) => {
         .then(resp => {
             setLoading(false)
             setFailedAttempt(false)
-            authContext.storeSessionInfo({uname: uname, ...resp.data.data})
-            console.log(resp)
+            // authActions.createSession(resp.data.data)
+            authActions({type: actions.CREATE_SESSION, uname: uname, ...resp.data.data})
         })
         .catch(err => {
+            console.log(err)
             setLoading(false)
             setFailedAttempt(true)
         })
