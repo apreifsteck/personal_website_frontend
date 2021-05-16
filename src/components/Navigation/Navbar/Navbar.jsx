@@ -9,7 +9,6 @@ import { useAuth, actions } from '../../../hocs/contexts/authContext';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        marginBottom: 40
     },
     title: {
         flexGrow: 1

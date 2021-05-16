@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: "50%",
 		width: "250px",
 		height: "250px",
+		"&:hover": {
+			cursor: "pointer"
+		}
 	},
 	flipImage: {
 		animation: `$flip ${timing} ${theme.transitions.easing.easeOut} forwards`,
@@ -16,15 +19,6 @@ const useStyles = makeStyles((theme) => ({
 		animation: `$unflip ${timing} ${theme.transitions.easing.easeOut} forwards`,
 	},
 	"@keyframes flip": {
-		// "0%": {
-		// 	transform: "scale(1,1)",
-		// },
-		// "50%": {
-		// 	transform: "scale(0, 0)",
-		// },
-		// "100%": {
-		// 	transform: "scale(1, 1)",
-		// },
 		from: {
 			transform: "rotateY(-180deg)",
 		},
@@ -33,15 +27,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	"@keyframes unflip": {
-		// "0%": {
-		// 	transform: "scale(1,1)",
-		// },
-		// "50%": {
-		// 	transform: "scale(0, 0)",
-		// },
-		// "100%": {
-		// 	transform: "scale(1, 1)",
-		// },
 		from: {
 			transform: "rotateY(180deg)",
 		},

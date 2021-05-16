@@ -17,6 +17,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import styles from "./styles";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
 	const [scrollPercent, updateScrollPercent] = useState(0);
@@ -65,6 +66,14 @@ const Home = (props) => {
 			<GridListTileBar title={item.title} />
 		</GridListTile>
 	));
+	const links = [
+		["About Me", "aboutMe"], 
+		["Blog", "blog"], 
+		["Art", ""], 
+		["Trashcan", ""]
+	].map(([linkText, path]) => <Button key={linkText} component={Link} to={"/" + path} >{linkText}</Button>)
+
+
 	return (
 		<Grid container direction="column">
 			<Grid
@@ -100,19 +109,17 @@ const Home = (props) => {
 						color="primary"
 						aria-label="large outlined primary button group"
 					>
-						<Button>About Me</Button>
-						<Button>Blog</Button>
-						<Button>Art</Button>
-						<Button>Trashcan</Button>
+						{links}
 					</ButtonGroup>
 				</Grid>
 				<Grid item>
 					<IconButton
-						className={classes.buttons}
+						className={classes.iconButton}
 						onClick={toggleScroll}
 						style={{
 							transform: `rotate(${scrollPercent * 180}deg)`,
 						}}
+						TouchRippleProps={{classes: {root: classes.touchRipple}}}
 					>
 						<ExpandMoreIcon style={{ fontSize: 60 }} />
 					</IconButton>

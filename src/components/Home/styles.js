@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { fade, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
 	panel_top: {
@@ -15,8 +15,22 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.main,
 		paddingTop: "40px",
 	},
-	buttons: {
+	link: {
+		textDecoration: "none",
+		"&:visited": {
+			color: "inherit"
+		}
+	},
+	iconButton: {
 		marginTop: "4em",
+		backgroundColor: fade("#0000", .035),
+		"&:hover, &.Mui-focusVisible": {
+			color: theme.palette.primary.light,
+			backgroundColor: fade(theme.palette.primary.light, .1)
+		}
+	},
+	touchRipple: {
+		color: fade(theme.palette.primary.light, .35)
 	},
 	gridList: {
 		padding: "20px 0 40px",

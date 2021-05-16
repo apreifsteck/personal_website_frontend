@@ -33,7 +33,11 @@ export const AuthProvider = ({children}) => {
 	const [state, dispatch] = useReducer(authReducer, initialState)
 	useEffect(() => {
 		for (const [k, v] of Object.entries(state)) {
-			if (typeof(v) === "string") { localStorage.setItem(k, v) }
+			if (typeof(v) === "string") { 
+				localStorage.setItem(k, v) 
+			} else if (v === null) {
+				localStorage.removeItem(k)
+			}
 		}
 	}, [state])
 	
