@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 const Login = (props) => {
     const classes = useStyles()
 
-    // const authContext = useContext(AuthContext)
     const [, authActions] = useAuth()
 
     const [pass, setPass] = useState("")

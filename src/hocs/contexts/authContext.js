@@ -41,22 +41,3 @@ export const AuthProvider = ({children}) => {
 		<AuthContext.Provider value={[state, dispatch]}>{children}</AuthContext.Provider>
 	)
 }
-
-
-
-// export const useAuth = () => {
-// 	const [authContext, setAuthContext] = useContext(AuthContext)
-// 	const [authState, dispatch] = useReducer(authReducer, authContext)
-// 	useEffect(() => {
-// 		setAuthContext(authState)
-
-// 		for (const [k, v] of Object.entries(authState)) {
-// 			if (typeof(v) === "string") { localStorage.setItem(k, v) }
-// 		}
-// 	}, [authState, setAuthContext])
-// 	return [authState, {
-// 		createSession: (sessionInfo) => dispatch({type: actions.CREATE_SESSION, ...sessionInfo}),
-// 		deleteSession: () => dispatch({type: actions.DELETE_SESSION}),
-// 		refreshSession: (sessionInfo) => dispatch({type: actions.REFRESH_SESSION, ...sessionInfo})
-// 	}]
-// }

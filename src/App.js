@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 
-import { AuthContext, AuthProvider } from "./hocs/contexts/authContext"
+import { AuthProvider } from "./hocs/contexts/authContext"
 import RequestInterceptors from './hocs/Utils/RequestInterceptors'
 
 import Layout from "./hocs/Layout/Layout";
@@ -17,11 +17,6 @@ import Login from "./components/Auth/Login"
 import "./App.css";
 
 function App() {
-	// const [authState, updateAuthState] = useState({ 
-	// 	accessToken: localStorage.getItem("accessToken") || null,
-	// 	refreshToken: localStorage.getItem("refreshToken") || null,
-	// 	uname: localStorage.getItem("uname") || null,
-	// })
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>
