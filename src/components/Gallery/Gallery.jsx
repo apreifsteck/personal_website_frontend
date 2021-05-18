@@ -6,6 +6,7 @@ import API from '../../API/API'
 import { useAuth } from '../../hocs/contexts/authContext';
 import ImageUploadDialog from '../Utilities/ImageUploadDialog';
 import { PhotoCamera } from '@material-ui/icons';
+import Viewer from './Viewer';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: "20px"
     },
     image: {
-        // height: "max-content",
-        // width: "max-content",
         height: "100%",
         width: "100%",
         objectFit: "contain"
@@ -52,34 +51,37 @@ const Gallery = (props) => {
     
     const [pics, setPics] = useState([])
     const [uploaderOpen, setUploaderOpen] = useState(false)
+    const [viewerOpen, setViewerOpen] = useState(false)
+    const [selectedImage, setSelectedImage] = useState()
 
     useEffect(() => {
         APIInstance.getPrimaryImages()
-        .then(resp => setPics(resp.data.data))
+        .then(resp => setPics(resp.data.data.map(
+            (pic) => ({src: API.getImagePathFromFilename(pic.filename), 
+                title: pic.title, description: pic.description}))))
         .catch(err => console.log(err))
-    }, [APIInstance])
+    }, [APIInstance, uploaderOpen])
 
-    const onClickHandler = (e) => {
-        console.log("clicked")
+    const onClickHandler = (e, key) => {
+        setViewerOpen(true)
+        setSelectedImage(pics[key])
     }
-
+    const closeHandler = () => {
+        setViewerOpen(false)
+    }
     const classes = useStyles()
     return (
         <Container>
+            <Viewer open={viewerOpen} img={selectedImage} onClick={closeHandler}/>
             <div className={classes.root}>
-                <GridList cellHeight={180} className={classes.gridList}>
-                    {pics.map((pic) => (
-                    <GridListTile key={pic.filename} className={classes.tile} onClick={onClickHandler} component={ButtonBase}>
-                        <img src={API.getImagePathFromFilename(pic.filename)} alt={pic.title} className={classes.image} />
+                <GridList cellHeight={240} className={classes.gridList}>
+                    {pics.map((pic, index) => (
+                    <GridListTile key={index} className={classes.tile} onClick={(e) => onClickHandler(e, index)} component={ButtonBase}>
+                        <img src={pic.src} alt={pic.title} className={classes.image} />
                         <GridListTileBar
                         title={pic.title}
                         subtitle={<span>{pic.description}</span>}
                         />
-                        {/* <img src={API.getImagePathFromFilename(pic.filename)} alt={pic.title} className={classes.image} />
-                        <GridListTileBar
-                        title={pic.title}
-                        subtitle={<span>{pic.description}</span>}
-                        /> */}
                     </GridListTile>
                     ))}
                 </GridList>

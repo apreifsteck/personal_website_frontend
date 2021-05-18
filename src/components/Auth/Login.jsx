@@ -34,7 +34,7 @@ const Login = (props) => {
             setLoading(false)
             setFailedAttempt(false)
             authActions({type: actions.CREATE_SESSION, uname: uname, ...resp.data.data})
-            history.push("/")
+            history.goBack(-1)
         })
         .catch(err => {
             console.log(err)
@@ -45,6 +45,9 @@ const Login = (props) => {
 
     return (  
         <form onSubmit={loginHandler}>
+            {history.location.state && 
+            history.location.state.timeout &&
+            <Typography variant="h5">Your session has timed out. Please sign in again.</Typography>}
             <LoadingBackdrop open={loading}/>
             <Grid container justify="center" direction="column" spacing={2}>
                 <Grid item>

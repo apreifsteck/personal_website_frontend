@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import {Dialog, DialogActions, DialogContent, DialogTitle, 
-    // IconButton, 
     makeStyles, Button, 
-    // Typography
+    Typography
 } from "@material-ui/core"
 
-// import {PhotoCamera} from "@material-ui/icons"
 
-import TextField from '../UI/TextField'
+import TextField from '../UI/Form/FormInputs/TextField'
 import {length, required} from '../UI/validators'
-import Form from '../UI/Form'
-// import API from '../../API/API'
+import Form from '../UI/Form/Form'
+import ImageInput from '../UI/Form/FormInputs/ImageInput'
+import LoadingBackdrop from '../UI/LoadingBackdrop';
+import API from '../../API/API'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,67 +27,61 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const ImageUploadDialog = (props) => {
-    // const formRef = useRef()
+const ImageUploadDialog = ({onClose, ...props}) => {
     const handleSubmit = (e) => {
-        console.log("handling submission")
+        setLoading(true)
+        API.uploadImage(title, desc, img)
+        .then(resp => {
+            setLoading(false)
+            onClose()
+        })
+        .catch(err => console.log(err))
     }
 
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
-    const [, setImg] = useState({name: ""})
+    const [img, setImg] = useState()
+    const [loading, setLoading] = useState(false)
 
     const handleImgChange = (e) => {
-        console.log(e.target.files)
         setImg(e.target.files[0])
     }
 
-    const validators = [required, length(5)]
+    const validators = [required, length(2)]
 
     const classes = useStyles()
     return (
-        <Dialog {...props} fullWidth>
-            <DialogTitle>Upload an Image</DialogTitle>
-            <Form onSubmit={handleSubmit}>
-                <DialogContent className={classes.root}>
-                    <TextField 
-                        label="Title" 
-                        variant="outlined" 
-                        className={classes.textField}
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        validations={validators}
-                        />
-                    <TextField 
-                        fullWidth
-                        multiline
-                        label="Description"
-                        variant="outlined"
-                        value={desc}
-                        className={classes.textField}
-                        onChange={(e) => setDesc(e.target.value)} 
-                        />
-                    {/* <input
-                    accept="image/*" 
-                    className={classes.input} 
-                    id="icon-button-file" 
-                    name="image_upload"
-                    type="file" 
-                    onChange={handleImgChange}
-                    required
-                    />
-                    <label htmlFor="icon-button-file">
-                        <IconButton color="primary" aria-label="upload picture" component="span" type="button">
-                            <PhotoCamera />
-                        </IconButton>
-                    </label>
-                    <Typography component="span" color="primary">{img.name}</Typography> */}
-                </DialogContent>
-                <DialogActions>
-                    <Button type="submit" color="primary" variant="outlined">Submit</Button>
-                </DialogActions>
-            </Form>
-        </Dialog>
+        <Fragment>
+            <LoadingBackdrop open={loading}/>
+            <Dialog {...props} fullWidth>
+                <DialogTitle>Upload an Image</DialogTitle>
+                <Form onSubmit={handleSubmit} failedValidationCallback={() => console.log("form invalid")}>
+                    <DialogContent className={classes.root}>
+                        <TextField 
+                            label="Title" 
+                            variant="outlined" 
+                            className={classes.textField}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            validations={validators}
+                            />
+                        <TextField 
+                            fullWidth
+                            multiline
+                            label="Description"
+                            variant="outlined"
+                            value={desc}
+                            className={classes.textField}
+                            onChange={(e) => setDesc(e.target.value)} 
+                            />
+                        <ImageInput validations={[required]} onChange={handleImgChange} value={img} />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button type="submit" color="primary" variant="outlined">Submit</Button>
+                    </DialogActions>
+                </Form>
+            </Dialog>
+        </Fragment>
     );
 };
 export default ImageUploadDialog;

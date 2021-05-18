@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import API from '../../../API/API'
 import { useAuth, actions } from '../../../hocs/contexts/authContext';
+import routes from '../../../routes';
 // Might also need button, IconButton, and menu icon
 
 const useStyles = makeStyles((theme) => ({
@@ -40,8 +41,8 @@ const Navbar = (props) => {
                     <Typography align='left' variant="h6" className={classes.title}>App</Typography>
                     <Button color="inherit">
                         {authState.accessToken ?
-                        <Link to="/home" onClick={logoutHandler} className={classes.link}>Logout</Link> :
-                        <Link to="/login" className={classes.link}>Login</Link>
+                        <Link to={routes.home.path} onClick={logoutHandler} className={classes.link}>Logout</Link> :
+                        <Link to={routes.login.path} className={classes.link}>Login</Link>
                         }
                     </Button>
                 </Toolbar>
