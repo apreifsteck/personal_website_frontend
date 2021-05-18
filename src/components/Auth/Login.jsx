@@ -19,7 +19,7 @@ const Login = (props) => {
     let history = useHistory()
     const classes = useStyles()
 
-    const [authContext, authActions] = useAuth()
+    const [, authActions] = useAuth()
 
     const [pass, setPass] = useState("")
     const [uname, setUname] = useState("")

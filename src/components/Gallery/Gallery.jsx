@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, Fragment } from 'react';
-import { Container, GridList, GridListTile, GridListTileBar, Button, makeStyles, ButtonBase, IconButton } from '@material-ui/core';
+import { Container, GridList, GridListTile, GridListTileBar, makeStyles, ButtonBase, IconButton } from '@material-ui/core';
 
 import {APIContext} from '../../App'
 import API from '../../API/API'
