@@ -1,10 +1,11 @@
 import React, {useState } from 'react'
 import { useAuth, actions } from '../../hocs/contexts/authContext'
-import { createSession } from '../../API/Auth'
+import API from '../../API/API'
 
 import { Button, Grid, makeStyles, TextField, Typography } from '@material-ui/core'
 
 import LoadingBackdrop from '../../components/UI/LoadingBackdrop'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
     accountIcon: {
@@ -15,9 +16,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Login = (props) => {
+    let history = useHistory()
     const classes = useStyles()
 
-    const [, authActions] = useAuth()
+    const [authContext, authActions] = useAuth()
 
     const [pass, setPass] = useState("")
     const [uname, setUname] = useState("")
@@ -27,12 +29,12 @@ const Login = (props) => {
     const loginHandler = (e) => {
         e.preventDefault()
         setLoading(true)
-        createSession(uname, pass)
+        API.createSession(uname, pass)
         .then(resp => {
             setLoading(false)
             setFailedAttempt(false)
-            // authActions.createSession(resp.data.data)
             authActions({type: actions.CREATE_SESSION, uname: uname, ...resp.data.data})
+            history.push("/")
         })
         .catch(err => {
             console.log(err)

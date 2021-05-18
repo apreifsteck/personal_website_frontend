@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Button, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 
-import { deleteSession } from '../../../API/Auth'
+import API from '../../../API/API'
 import { useAuth, actions } from '../../../hocs/contexts/authContext';
 // Might also need button, IconButton, and menu icon
 
@@ -26,7 +26,7 @@ const Navbar = (props) => {
     const classes = useStyles()
 
     const logoutHandler = () => {
-        deleteSession()
+        API.deleteSession()
         .then(resp => {
             authDispatch({type: actions.DELETE_SESSION})
         })

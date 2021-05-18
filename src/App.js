@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -9,9 +9,13 @@ import RequestInterceptors from './hocs/Utils/RequestInterceptors'
 
 import Layout from "./hocs/Layout/Layout";
 import routes from './routes'
+import API from './API/API'
+
 
 
 import "./App.css";
+
+export const APIContext = createContext()
 
 function App() {
 	const componentRoutes = Object.entries(routes).map(([key, {path, component}]) => (
@@ -24,9 +28,11 @@ function App() {
 				<BrowserRouter>
 					<RequestInterceptors>
 						<Layout>
-							<Switch>
-								{componentRoutes}
-							</Switch>
+							<APIContext.Provider value={new API()}>
+								<Switch>
+									{componentRoutes}
+								</Switch>
+							</APIContext.Provider>
 						</Layout>
 					</RequestInterceptors>
 				</BrowserRouter>

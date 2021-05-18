@@ -69,7 +69,7 @@ const Home = (props) => {
 	const links = [
 		["About Me", "aboutMe"], 
 		["Blog", "blog"], 
-		["Art", ""], 
+		["Art", "gallery"], 
 		["Trashcan", ""]
 	].map(([linkText, path]) => <Button key={linkText} component={Link} to={"/" + path} >{linkText}</Button>)
 

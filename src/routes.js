@@ -1,6 +1,7 @@
 import Blog from "./components/Blog/Blog";
 import Home from "./components/Home/Home";
 import AboutMe from "./components/AboutMe/AboutMe";
+import Gallery from "./components/Gallery/Gallery"
 import Login from "./components/Auth/Login"
 
 const routes = {
@@ -23,6 +24,11 @@ const routes = {
 		path: "/login",
 		component: Login,
 		text: "Login"
+	},
+	gallery: {
+		path: "/gallery",
+		component: Gallery,
+		text: "Art"
 	}
 }
 
