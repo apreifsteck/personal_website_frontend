@@ -2,7 +2,6 @@ import React, { useState, Fragment } from 'react';
 
 import {Dialog, DialogActions, DialogContent, DialogTitle, 
     makeStyles, Button, 
-    Typography
 } from "@material-ui/core"
 
 
@@ -28,20 +27,21 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const ImageUploadDialog = ({onClose, ...props}) => {
-    const handleSubmit = (e) => {
-        setLoading(true)
-        API.uploadImage(title, desc, img)
-        .then(resp => {
-            setLoading(false)
-            onClose()
-        })
-        .catch(err => console.log(err))
-    }
-
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
     const [img, setImg] = useState()
     const [loading, setLoading] = useState(false)
+
+    const handleSubmit = (e) => {
+        setLoading(true)
+        API.uploadImage(title, desc, img, true)
+        .then(resp => {
+            setLoading(false)
+            onClose()
+            setImg(null)
+        })
+        .catch(err => console.log(err))
+    }
 
     const handleImgChange = (e) => {
         setImg(e.target.files[0])
@@ -53,7 +53,7 @@ const ImageUploadDialog = ({onClose, ...props}) => {
     return (
         <Fragment>
             <LoadingBackdrop open={loading}/>
-            <Dialog {...props} fullWidth>
+            <Dialog {...props} fullWidth onBackdropClick={onClose}>
                 <DialogTitle>Upload an Image</DialogTitle>
                 <Form onSubmit={handleSubmit} failedValidationCallback={() => console.log("form invalid")}>
                     <DialogContent className={classes.root}>

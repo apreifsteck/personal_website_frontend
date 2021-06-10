@@ -4,6 +4,7 @@ const initialState = {
 	accessToken: localStorage.getItem("accessToken") || null,
 	refreshToken: localStorage.getItem("refreshToken") || null,
 	uname: localStorage.getItem("uname") || null,
+	userToken: localStorage.getItem("userToken") || null
 }
 
 export const AuthContext = React.createContext(initialState)
@@ -17,9 +18,14 @@ export const actions = {
 const authReducer = (state, action) => {
 	switch(action.type) {
 		case actions.CREATE_SESSION:
-			return {accessToken: action.accessToken, refreshToken: action.refreshToken, uname: action.uname}
+			return {
+				accessToken: action.accessToken, 
+				refreshToken: action.refreshToken, 
+				uname: action.uname,
+				userToken: action.userToken
+			}
 		case actions.DELETE_SESSION:
-			return {accessToken: null, refreshToken: null, uname: null}
+			return {accessToken: null, refreshToken: null, uname: null, userToken: null}
 		case actions.REFRESH_SESSION:
 			return {...state, accessToken: action.accessToken, refreshToken: action.refreshToken}
 		default:

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {makeStyles, Paper} from "@material-ui/core"
+import {Button, makeStyles, Paper, Grid} from "@material-ui/core"
 import Backdrop from '../../hocs/UI/Backdrop/Backdrop'
-import { Translate } from '@material-ui/icons';
+import { useAuth } from '../../hocs/contexts/authContext';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    image: {
         width: "inherit",
         height: "inherit",
         objectFit: "contain",
@@ -15,16 +15,37 @@ const useStyles = makeStyles((theme) => ({
         height: "50vh",
         width: "88.88vw",
         backgroundColor: theme.palette.grey[800]
+    },
+    button: {
+        color: theme.palette.secondary.main,
+        margin: 20
     }
 }))
 
 const Viewer = ({open, img, ...props}) => {
+    const [authContext, ] = useAuth()
+
     const classes = useStyles()
     return (
         <Backdrop open={open} onClick={props.onClick}>
-            <Paper className={classes.paper} elevation={8}>
-                {img && <img src={img.src} alt={img.alt} className={classes.root}/>}
-            </Paper>
+            <Grid container direction="column" alignContent="center">
+                <Grid item>
+                    <Paper className={classes.paper} elevation={8}>
+                        {img && <img src={img.src} alt={img.alt} className={classes.image}/>}
+                    </Paper>
+                </Grid>
+                <Grid item>
+                    {authContext.accessToken && 
+                    <Button 
+                    size="large" 
+                    variant="contained" 
+                    className={classes.button}
+                    onClick={props.deleteHandler}
+                    >Delete</Button>
+                    }
+                </Grid>
+            </Grid>
+            
         </Backdrop>
     );
 };

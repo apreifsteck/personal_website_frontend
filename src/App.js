@@ -10,7 +10,7 @@ import RequestInterceptors from './hocs/Utils/RequestInterceptors'
 import Layout from "./hocs/Layout/Layout";
 import routes from './routes'
 import API from './API/API'
-
+import SocketProvider from "./hocs/contexts/socketContext";
 
 
 import "./App.css";
@@ -29,9 +29,11 @@ function App() {
 					<RequestInterceptors>
 						<Layout>
 							<APIContext.Provider value={new API()}>
-								<Switch>
-									{componentRoutes}
-								</Switch>
+								{/* <SocketProvider> */}
+									<Switch>
+										{componentRoutes}
+									</Switch>
+								{/* </SocketProvider> */}
 							</APIContext.Provider>
 						</Layout>
 					</RequestInterceptors>

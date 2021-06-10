@@ -1,20 +1,23 @@
-const markdownToHTML = (text, media) => {
-    const expressions = {
-        headers: [
-            /###### (.*)\n/g,
-            /##### (.*)\n/g,
-            /#### (.*)\n/g,
-            /### (.*)\n/g,
-            /## (.*)\n/g,
-            /# (.*)\n/g,
-        ],
-        unordered_lists: /((-) (.*\n?))+/g,
-        ordered_lists: /((\d\.) (.*\n?))+/g,
-        strong: /\*(.*)\*/g,
-        italic: /_(.*)_/g,
-        code: /`(.*)`/g,
-        image: /\[img\]\((.*)\)/g
-    }
+const expressions = {
+    headers: [
+        /###### (.*)\n/g,
+        /##### (.*)\n/g,
+        /#### (.*)\n/g,
+        /### (.*)\n/g,
+        /## (.*)\n/g,
+        /# (.*)\n/g,
+    ],
+    unordered_lists: /((-) (.*\n?))+/g,
+    ordered_lists: /((\d\.) (.*\n?))+/g,
+    strong: /\*(.*)\*/g,
+    // Negative lookbehind to make sure you don't get underscores in urls
+    italic: /(?<!https?:\/\/.*)_(.*?)_/g,
+    code: /`(.*)`/g,
+    image: /\[img\]\((.*?)\)/g
+}
+
+const markdownToHTML = (text) => {
+    
 
     expressions.headers.forEach((currentVal, index) => {
         text = text.replace(currentVal, (match, group1) => `<h${6 - index}>${group1}</h${6 - index}>`)
@@ -39,12 +42,7 @@ const markdownToHTML = (text, media) => {
         return `<code>${group1}</code>`
     })
     text = text.replace(expressions.image, (match, group1) => {
-        // First, look in our object of picture snapshots.
-        if (media.hasOwnProperty(group1)) {
-            return `<img src="${media[group1]}"/>`
-        }
         return `<img src="${group1}"/>`
-
     })
 
     return text
